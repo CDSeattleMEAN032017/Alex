@@ -1,0 +1,40 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Yoooo dude!</h1>
+    <h2>The Dojo Message Board</h2>
+    <hr />
+    <div id="createPost">
+      <form action="/" method="POST">
+        Name: <input type="text" name="name" /><br />
+        Message: <input type="text" name="content" /><br />
+        <input type="submit" value="Post message" />
+      </form>
+    </div>
+    <hr />
+    <% for (var i = 0; i < data.length; i++) { %>
+      <h2>Name: <%= data[i].name %></h2><br />
+      <h2>Message: <%= data[i].content %></h2><br />
+      <% if (data[i].comments.length > 0) { %>
+        Comments: <br />
+        <% for (var j = 0; j < data[i].comments.length; j++) { %>
+          <blockquote>
+            Name: <%= data[i].comments[j].name %><br />
+            Comment: <%= data[i].comments[j].content %><br />
+          </blockquote>
+        <% } %>
+      <% } %>
+      <blockquote>
+        Make a comment:
+        <form method="post" action="comment/<%= data[i].id %>">
+          Name: <input type="text" name="name"/><br />
+          Comment: <input type="text" name="content" /><br />
+          <input type="submit" />
+        </form>
+      </blockquote>
+      <hr />
+    <% } %>
+
+  </body>
+</html>
