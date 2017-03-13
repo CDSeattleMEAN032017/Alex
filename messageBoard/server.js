@@ -93,24 +93,6 @@ app.post('/comment/:id', function(req, res) {
   });
 });
 
-// like a post
-// this hits the like route on the id of the post
-app.post('/like', function(req, res) {
-  // get the id from the hidden form input
-  var id = req.body.id;
-  console.log(req.body);
-  // update the like field by using mongoose's inc method
-  Post.update({_id : id}, {$inc: { likes: 1 }}, function(err) {
-    if(err) {
-      console.log("Something went wrong!");
-      res.render('error', { errors: quote.errors });
-    } else {
-      console.log("A post has been liked!");
-      res.redirect('/quotes');
-    }
-  });
-});
-
 // start server up
 app.listen(8000, function() {
   console.log("Server started on port 8000");
