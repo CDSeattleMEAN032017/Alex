@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 var app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 // setting up static files
 app.use(express.static(path.join(__dirname, './static')));
