@@ -13,16 +13,20 @@
     <script>
       var usersAppModule = angular.module('usersApp', []);
       usersAppModule.controller('usersController', function($scope) {
-        $scope.dateHolder = { date: moment()}
-        $scope.users = [{firstName: "Alex", lastName: "Hartle", language: "JavaScript"},
-                        {firstName: "Pauline", lastName: "Alvarado", language: "Python"},
-                        {firstName: "Harley", lastName: "Hartle", language: "Dog"},
-                        {firstName: "Benjamin", lastName: "Franklin", language: "JavaScript"},
-                        {firstName: "Celine", lastName: "Alvarado", language: "AnimeScript"},
-                        {firstName: "Temperance", lastName: "Brennan", language: "Bones"},
-                        {firstName: "Seely", lastName: "Booth", language: "Python"}];
+        $scope.users = [{firstName: "Alex", lastName: "Hartle", language: "JavaScript", date: ""},
+                        {firstName: "Pauline", lastName: "Alvarado", language: "Python", date: ""},
+                        {firstName: "Harley", lastName: "Hartle", language: "Dog", date: ""},
+                        {firstName: "Benjamin", lastName: "Franklin", language: "JavaScript", date: ""},
+                        {firstName: "Celine", lastName: "Alvarado", language: "AnimeScript", date: ""},
+                        {firstName: "Temperance", lastName: "Brennan", language: "Bones", date: ""},
+                        {firstName: "Seely", lastName: "Booth", language: "Python", date: ""}];
         $scope.addUser = function() {
-          $scope.users.push($scope.newUser);
+          $scope.users.push({
+            firstName : $scope.newUser.firstName,
+            lastName : $scope.newUser.lastName,
+            language : $scope.newUser.language,
+            date: new Date()
+          });
           $scope.newUser = {};
         },
         $scope.removeUser = function(user) {
@@ -70,6 +74,11 @@
                   <span ng-show="sortType == 'language' && sortReverse">&#9660;</span>
                 </th>
                 <th>
+                  <a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse">Date Created</a>
+                  <span ng-show="sortType == 'date' && !sortReverse">&#9650;</span>
+                  <span ng-show="sortType == 'date' && sortReverse">&#9660;</span>
+                </th>
+                <th>
                   Actions
                 </th>
               </tr>
@@ -78,10 +87,10 @@
               <td>{{ user.firstName }}</td>
               <td>{{ user.lastName }}</td>
               <td>{{ user.language }}</td>
+              <td>{{ user.date | date: 'medium'}}</td>
               <td><a href="#" ng-click="removeUser(user)">Delete User</a></td>
             </tr>
           </table>
-          {{  }}
           Search users: <input type="text" ng-model="userSearch" />
         </p>
       </div>
