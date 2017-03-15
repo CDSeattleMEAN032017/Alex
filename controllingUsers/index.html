@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='usersApp'>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script>
+      var usersAppModule = angular.module('usersApp', []);
+      usersAppModule.controller('usersController', function($scope) {
+        $scope.dateHolder = { date: moment()}
+        $scope.users = [{firstName: "Alex", lastName: "Hartle", language: "JavaScript"},
+                        {firstName: "Pauline", lastName: "Alvarado", language: "Python"},
+                        {firstName: "Harley", lastName: "Hartle", language: "Dog"},
+                        {firstName: "Benjamin", lastName: "Franklin", language: "JavaScript"},
+                        {firstName: "Celine", lastName: "Alvarado", language: "AnimeScript"},
+                        {firstName: "Temperance", lastName: "Brennan", language: "Bones"},
+                        {firstName: "Seely", lastName: "Booth", language: "Python"}];
+        $scope.addUser = function() {
+          $scope.users.push($scope.newUser);
+          $scope.newUser = {};
+        },
+        $scope.removeUser = function(user) {
+          var index = $scope.users.indexOf(user);
+          $scope.users.splice(index, 1);
+        }
+        $scope.sortType = 'firstName';
+        $scope.sortReverse = false;
+        $scope.searchUsers = '';
+      });
+    </script>
+    <title>Document</title>
+  </head>
+  <body ng-init>
+    <div ng-controller="usersController">
+      <div id="formDiv" class="createUser">
+        <h3>Create a New User</h3>
+        <form ng-submit="addUser()">
+          First Name: <input type="text" class="form-control" ng-model="newUser.firstName"/><br />
+          Last Name: <input type="text" class="form-control" ng-model="newUser.lastName" /><br />
+          Favorite Programming Language: <input type="text" class="form-control" ng-model="newUser.language" /><br />
+          <input type="submit" class="btn btn-primary" value="Create User" />
+        </form>
+        <hr />
+      </div>
+      <div id="usersDiv" class="resultHolder">
+        <h3>Users</h3>
+        <p>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>
+                  <a href="#" ng-click="sortType = 'firstName'; sortReverse = !sortReverse">First Name</a>
+                  <span ng-show="sortType == 'firstName' && !sortReverse">&#9650;</span>
+                  <span ng-show="sortType == 'firstName' && sortReverse">&#9660;</span>
+                </th>
+                <th>
+                  <a href="#" ng-click="sortType = 'lastName'; sortReverse = !sortReverse">Last Name</a>
+                  <span ng-show="sortType == 'lastName' && !sortReverse">&#9650;</span>
+                  <span ng-show="sortType == 'lastName' && sortReverse">&#9660;</span>
+                </th>
+                <th>
+                  <a href="#" ng-click="sortType = 'language'; sortReverse = !sortReverse">Favorite Language</a>
+                  <span ng-show="sortType == 'language' && !sortReverse">&#9650;</span>
+                  <span ng-show="sortType == 'language' && sortReverse">&#9660;</span>
+                </th>
+                <th>
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tr ng-repeat="user in users | orderBy:sortType:sortReverse | filter:userSearch">
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.lastName }}</td>
+              <td>{{ user.language }}</td>
+              <td><a href="#" ng-click="removeUser(user)">Delete User</a></td>
+            </tr>
+          </table>
+          {{  }}
+          Search users: <input type="text" ng-model="userSearch" />
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
