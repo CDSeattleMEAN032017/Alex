@@ -13,13 +13,7 @@
     <script>
       var usersAppModule = angular.module('usersApp', []);
       usersAppModule.controller('usersController', function($scope) {
-        $scope.users = [{firstName: "Alex", lastName: "Hartle", language: "JavaScript", date: ""},
-                        {firstName: "Pauline", lastName: "Alvarado", language: "Python", date: ""},
-                        {firstName: "Harley", lastName: "Hartle", language: "Dog", date: ""},
-                        {firstName: "Benjamin", lastName: "Franklin", language: "JavaScript", date: ""},
-                        {firstName: "Celine", lastName: "Alvarado", language: "AnimeScript", date: ""},
-                        {firstName: "Temperance", lastName: "Brennan", language: "Bones", date: ""},
-                        {firstName: "Seely", lastName: "Booth", language: "Python", date: ""}];
+        $scope.users = [];
         $scope.addUser = function() {
           $scope.users.push({
             firstName : $scope.newUser.firstName,
