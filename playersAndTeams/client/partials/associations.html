@@ -1,0 +1,47 @@
+<h1>Yoooo associations!</h1>
+<div>
+  <form ng-submit="addPlayerToTeam()">
+    Player name:
+    <select ng-model="newAssociation.index">
+      <!-- $index is given to each value in the loop by angular -->
+      <option ng-repeat="player in players" value="{{$index}}">
+        {{ player.name }}
+      </option>
+    </select><br />
+    Team name:
+    <select ng-model="newAssociation.team">
+      <option ng-repeat="team in teams" value="{{team.name}}">
+        {{ team.name }}
+      </option>
+    </select><br />
+    <input type="submit" value="Add Association">
+  </form>
+</div>
+<div>
+  <table>
+    <thead>
+      <th>
+        Name
+      </th>
+      <th>
+        Team
+      </th>
+      <th>
+        Action
+      </th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="player in players">
+        <td>
+           {{ player.name }}
+        </td>
+        <td>
+          {{ player.team }}
+        </td>
+        <td>
+          <button ng-click="removePlayerFromTeam($index)">Remove Team</button>
+        </td>
+      </tr>
+    </tbody>
+</table>
+</div>

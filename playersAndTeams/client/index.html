@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="angular/angular.js"></script>
+    <script src="angular-route/angular-route.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </head>
+  <body>
+    <div>
+      <h1>Yooo world!</h1>
+      <a href="#!/players">Players</a>
+      <a href="#!/teams">Teams</a>
+      <a href="#!/associations">Associations</a>
+      <div ng-view>
+        <!-- partials will load here -->
+      </div>
+    </div>
+  </body>
+</html>
